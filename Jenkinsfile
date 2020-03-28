@@ -3,11 +3,9 @@ pipeline {
     stages {
       stage('Upload to AWS') {
         steps {
-          sh 'echo "Hello World!"'
-          sh '''
-            echo "multiline shell steps works too"
-            ls -lah
-          '''
+          withAWS(region:'us-east-1',credentials:'aws-static') {
+              s3Delete(bucket: 'shewitinv-jenkins', path:'**/*')
+              s3Upload(file: 'index.html', bucket: 'shewitinv-jenkins', path: '**/*');
         }
       }
    }
