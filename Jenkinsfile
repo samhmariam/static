@@ -6,6 +6,7 @@ pipeline {
           withAWS(region:'us-east-1',credentials:'aws-static') {
               s3Delete(bucket: 'shewitinv-jenkins', path:'**/*')
               s3Upload(file: 'index.html', bucket: 'shewitinv-jenkins', path: '**/*');
+          }
         }
       }
    }
